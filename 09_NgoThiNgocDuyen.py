@@ -19,13 +19,56 @@ def add_student(name, year_of_birth, address):
     print(f"Da them sinh vien {name} thanh cong.")
 
 
-# --- Phần thực thi chính để kiểm tra ---
+def print_student_list():
+    """
+    YÊU CẦU 2: Hoàn thiện hàm này.
+    - In ra tiêu đề "--- DANH SACH SINH VIEN ---".
+    - Nếu danh sách trống, in ra "Danh sach trong.".
+    - Nếu không, duyệt qua `student_list` và in thông tin mỗi sinh viên
+      trên một dòng theo định dạng: 
+      " - Ten: [Họ tên], Nam sinh: [Năm sinh], Dia chi: [Địa chỉ]"
+    """
+    print("\n--- DANH SACH SINH VIEN ---")
+    if not student_list:
+        print("Danh sach trong.")
+    else:
+        for student in student_list:
+            print(f" - Ten: {student['name']}, Nam sinh: {student['year_of_birth']}, Dia chi: {student['address']}")
+
+
+def search_student(search_name):
+    """
+    YÊU CẦU 3: Hoàn thiện hàm này.
+    - In ra tiêu đề "--- KET QUA TIM KIEM ---".
+    - Tìm kiếm trong `student_list` tất cả các sinh viên có tên (không phân biệt hoa thường)
+      chứa `search_name`.
+    - In ra thông tin của các sinh viên tìm thấy (theo định dạng như hàm print_student_list).
+    - Nếu không tìm thấy, in ra "Khong tim thay sinh vien nao.".
+    """
+    print("\n--- KET QUA TIM KIEM ---")
+    search_name_lower = search_name.lower()
+    found = False
+
+    for student in student_list:
+        if search_name_lower in student['name'].lower():
+            print(f" - Ten: {student['name']}, Nam sinh: {student['year_of_birth']}, Dia chi: {student['address']}")
+            found = True
+
+    if not found:
+        print("Khong tim thay sinh vien nao.")
+
+
 if __name__ == "__main__":
     print("--- CHUONG TRINH QUAN LY SINH VIEN ---")
-    print("\n1. Them sinh vien:")
+    
+    # Yêu cầu 1: Thêm sinh viên
     add_student("Nguyen Van An", 2003, "Da Nang")
     add_student("Tran Thi Binh", 2002, "Quang Nam")
     add_student("Le Van Hung", 2003, "Hue")
-print("\nDanh sach hien tai:")
-for sv in student_list:
-    print(sv)
+
+    # Yêu cầu 2: In danh sách
+    print_student_list()
+
+    # Yêu cầu 3: Tìm kiếm
+    search_student("an")
+    search_student("Dung")
